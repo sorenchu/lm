@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 public class BasicInputTest extends TestCase {
-    public void InputOneTest() {
+    public void testInputOne() {
         String input1 = "1 book at 12.49\n" + "1 music CD at 14.99\n" + "1 chocolate bar at 0.85";
         ReceiptCalculator receiptCalculator = new ReceiptCalculator(input1);
         String output = receiptCalculator.execute();
