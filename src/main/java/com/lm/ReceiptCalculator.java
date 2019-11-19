@@ -3,12 +3,10 @@ package com.lm;
 import java.util.ArrayList;
 
 public class ReceiptCalculator {
-    private String content;
     private ArrayList<Product> products;
 
     public ReceiptCalculator(String filecontent) {
-        content = filecontent;
-        this.parseInput();
+        this.parseInput(filecontent);
     }
 
     public String execute() {
@@ -16,25 +14,29 @@ public class ReceiptCalculator {
         double taxes = 0;
         double total = 0;
         for (Product product : this.products) {
-            output += product.getQuantity() + " " + 
-                    product.getName() + ": " + product.getTotalPrice() + "\n";
+            output += product.getQuantity() + " " + product.getName() + ": "
+                    + this.formatNumber(product.getTotalPrice()) + "\n";
             taxes += product.getTaxes();
             total += product.getTotalPrice();
         }
-        output += "Sales Taxes: " + taxes + "\n";
-        output += "Total: " + total;
+        output += "Sales Taxes: " + this.formatNumber(taxes) + "\n";
+        output += "Total: " + this.formatNumber(total);
         return output;
     }
-    
-    private void parseInput() {
+
+    public int getProductSize() {
+        return products.size();
+    }
+
+    private void parseInput(String content) {
         this.products = new ArrayList<Product>();
-        String[] lines = this.content.split("\n");
+        String[] lines = content.split("\n");
         for (String line : lines) {
             this.products.add(new Product(line));
         }
     }
 
-    public int getProductSize() {
-        return products.size();
+    private String formatNumber(double number) {
+        return (String.format("%.02f", number)).replace(",", ".");
     }
 }
