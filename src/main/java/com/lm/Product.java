@@ -4,6 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Product {
+    private static double IMPORTED_TAX = 0.05;
+    private static double REGULAR_TAX = 0.1;
+
     private int quantity;
     private String name;
     private boolean imported;
@@ -52,10 +55,10 @@ public class Product {
     public void calculateTaxes() {
         this.taxes = 0;
         if (this.isImported()) {
-            this.taxes += 0.05 * this.price;
+            this.taxes += this.getRoundedTaxes(IMPORTED_TAX);
         }
         if (!this.isExempted()) {
-            this.taxes += 0.10 * this.price;
+            this.taxes += this.getRoundedTaxes(REGULAR_TAX);
         }
     }
 
@@ -65,7 +68,7 @@ public class Product {
 
     public double getTotalPrice() {
         this.calculateTaxes();
-        return (this.taxes + this.price);
+        return (this.price + this.taxes);
     }
 
     public double getTaxes() {
@@ -107,6 +110,10 @@ public class Product {
             value = matcher.group();
         }
         return value;
+    }
+
+    private double getRoundedTaxes(double taxPercentage) {
+        return (double) Math.round(this.price * taxPercentage * 100d) / 100d;
     }
 
 }
