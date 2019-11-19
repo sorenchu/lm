@@ -16,6 +16,6 @@ public class ReceiptCalculatorTest extends TestCase {
     }
 
     public static Test suite() {
-        return new TestSuite(ReceiptCalculator.class);
+        return new TestSuite(ReceiptCalculatorTest.class);
     }
 }
