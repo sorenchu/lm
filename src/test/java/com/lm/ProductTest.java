@@ -25,6 +25,14 @@ public class ProductTest extends TestCase {
         assertFalse(product.isImported());
     }
     
+    public void testCreationSeveralWordsImported() {
+        Product product = new Product("1 imported box of chocolates at 10.00");
+        assertEquals(1, product.getQuantity());
+        assertEquals("imported box of chocolates", product.getName());
+        assertEquals(10.00, product.getPrice());
+        assertTrue(product.isImported());
+    }
+    
     public static Test suite() {
         return new TestSuite(ProductTest.class);
     }
