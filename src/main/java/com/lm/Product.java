@@ -11,10 +11,13 @@ public class Product {
     private String name;
     private boolean imported;
     private boolean exempted;
+
+    // FIXME: this is a different object
     private double price;
     private double taxes;
 
-    private String exemptedList[] = { "chocolate", "headache pills", "book" };
+    // FIXME: this should be in a configuration file
+    private static String exemptedList[] = { "chocolate", "headache pills", "book" };
 
     public Product() {
         this.quantity = 0;
@@ -34,6 +37,10 @@ public class Product {
         this.setImported();
         this.setExepmted();
         this.setPrice(info);
+    }
+
+    static public String formatNumber(double number) {
+        return (String.format("%.02f", number)).replace(",", ".");
     }
 
     public int getQuantity() {
@@ -73,6 +80,10 @@ public class Product {
 
     public double getTaxes() {
         return this.taxes;
+    }
+
+    public String print() {
+        return this.getQuantity() + " " + this.getName() + ": " + this.formatNumber(this.getTotalPrice()) + "\n";
     }
 
     private void setQuantityThroughInfo(String info) {
@@ -115,5 +126,4 @@ public class Product {
     private double getRoundedTaxes(double taxPercentage) {
         return (double) Math.round(this.price * taxPercentage * 100d) / 100d;
     }
-
 }

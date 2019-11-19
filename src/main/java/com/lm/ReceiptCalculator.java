@@ -14,13 +14,12 @@ public class ReceiptCalculator {
         double taxes = 0;
         double total = 0;
         for (Product product : this.products) {
-            output += product.getQuantity() + " " + product.getName() + ": "
-                    + this.formatNumber(product.getTotalPrice()) + "\n";
+            output += product.print();
             taxes += product.getTaxes();
             total += product.getTotalPrice();
         }
-        output += "Sales Taxes: " + this.formatNumber(taxes) + "\n";
-        output += "Total: " + this.formatNumber(total);
+        output += "Sales Taxes: " + Product.formatNumber(taxes) + "\n";
+        output += "Total: " + Product.formatNumber(total);
         return output;
     }
 
@@ -34,9 +33,5 @@ public class ReceiptCalculator {
         for (String line : lines) {
             this.products.add(new Product(line));
         }
-    }
-
-    private String formatNumber(double number) {
-        return (String.format("%.02f", number)).replace(",", ".");
     }
 }
