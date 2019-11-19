@@ -21,4 +21,8 @@ public class ReceiptCalculator {
             this.products.add(new Product(line));
         }
     }
+
+    public int getProductSize() {
+        return products.size();
+    }
 }
