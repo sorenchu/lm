@@ -5,6 +5,10 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 public class BasicInputTest extends TestCase {
+    public BasicInputTest(String testName) {
+        super(testName);
+    }
+
     public void testInputOne() {
         String input1 = "1 book at 12.49\n" + "1 music CD at 14.99\n" + "1 chocolate bar at 0.85";
         ReceiptCalculator receiptCalculator = new ReceiptCalculator(input1);
@@ -13,11 +17,7 @@ public class BasicInputTest extends TestCase {
                 + "Total: 29.83", output);
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( BasicInputTest.class );
+    public static Test suite() {
+        return new TestSuite(BasicInputTest.class);
     }
 }
