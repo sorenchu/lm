@@ -15,8 +15,8 @@ public class ReceiptCalculator {
         double total = 0;
         for (Product product : this.products) {
             output += product.print();
-            taxes += product.getTaxes();
-            total += product.getTotalPrice();
+            taxes += product.getPrice().calculateTaxes();
+            total += product.getPrice().getTotalPrice();
         }
         output += "Sales Taxes: " + Product.formatNumber(taxes) + "\n";
         output += "Total: " + Product.formatNumber(total);
